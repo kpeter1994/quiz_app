@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Főoldal{% endblock %}
+
+{% block content %}
+
+
+<div class="max-w-xl mx-auto py-12">
+
+    <form id="quiz-form" class="space-y-6">
+        {% csrf_token %}
+
+        {% for question in questions %}
+
+        {% load unicorn %}
+
+        {% unicorn 'quiz-card' question=question %}
+
+        {% endfor %}
+
+        <div class="mx-auto max-w-xl flex justify-end">
+            <button type="submit" id="submit_btn" class="bg-blue-500 cursor-pointer hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Küldés</button>
+        </div>
+    </form>
+
+
+    <div id="result" class="hidden mt-3 p-4 mb-4 text-xl text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('quiz-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        let formData = new FormData(this);
+
+        fetch("{% url 'quiz_submit' %}", {
+            method: "POST",
+            body: formData,
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('submit_btn').classList.add('hidden');
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('result').innerHTML = `
+                <p>Pontszám: ${data.score}</p>
+                <a href="/ranking" class="block text-center">Ranglista</a>
+            `;
+        })
+        .catch(error => console.error("Hiba:", error));
+    });
+</script>
+
+{% endblock %}
+

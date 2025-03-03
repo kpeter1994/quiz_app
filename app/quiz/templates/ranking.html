@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}Főoldal{% endblock %}
+
+{% block content %}
+
+
+<div class="max-w-2xl mx-auto py-12">
+
+
+<div class="relative overflow-x-auto sm:rounded-lg">
+     <h3 class="mb-2 font-bold">TOP 10 felhasználó</h3>
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                    Felhasználó
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Átlag pontszám
+                </th>
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                    Maximum pontszám
+                </th>
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                    Szórás
+                </th>
+                 <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                    Összes játék
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stat in stats %}
+        <tr class="border-b border-gray-200 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    {{ stat.user__username }}
+                </th>
+                <td class="px-6 py-4">
+                    {{ stat.avg_score|floatformat:2 }}
+                </td>
+                <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+                    {{ stat.max_score }}
+                </td>
+            <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+                    {{ stat.std_score|floatformat:2 }}
+                </td>
+            <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+                    {{ stat.count }}
+                </td>
+
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <h3 class="mt-6 mb-2 font-bold">Játékaid</h3>
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                    Felhasználónév
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Pontszám
+                </th>
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                    Időpont
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for score in scores %}
+        <tr class="border-b border-gray-200 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                    {{ score.user.username }}
+                </th>
+                <td class="px-6 py-4">
+                    {{ score.score }}
+                </td>
+                <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+                     {{ score.created_at }}
+                </td>
+
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+
+
+</div>
+
+
+
+{% endblock %}
+

@@ -1,0 +1,59 @@
+<div class="block mx-auto max-w-xl p-6 bg-white border border-gray-200 rounded-lg shadow-sm  dark:bg-gray-800 dark:border-gray-700">
+    <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"> {{ question.text }} </h5>
+
+    {{ question.category }}
+
+
+    {% if question.q_type == 'scq' %}
+    <ul class="mt-6 space-y-2">
+        {% for answer in answers %}
+         <li>
+            <input type="radio" id="{{answer.id}}-option" name="{{question.id}}" value="{{answer.id}}" class="hidden peer">
+            <label for="{{answer.id}}-option" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 dark:peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <div class="block">
+                <div class="w-full text-sm">{{ answer.text }}</div>
+            </div>
+        </label>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% elif question.q_type == 'numerical' %}
+    <div class="mt-6">
+        <input id="name" type="number" name="{{question.id}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+    </div>
+
+
+    {% elif question.q_type == 'mcq' %}
+    <ul class="mt-6 space-y-2">
+        {% for answer in answers %}
+        <li>
+            <input type="checkbox" id="{{answer.id}}-option" name="{{question.id}}" value="{{answer.id}}" class="hidden peer">
+            <label for="{{answer.id}}-option" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 dark:peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <div class="block">
+                <div class="w-full text-sm">{{ answer.text }}</div>
+            </div>
+        </label>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% elif question.q_type == 'true_false' %}
+    <ul class="mt-6 space-y-2">
+        {% for answer in answers %}
+        <li>
+            <input type="radio" id="{{answer.id}}-option" name="{{question.id}}" value="{{answer.id}}" class="hidden peer">
+            <label for="{{answer.id}}-option" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 dark:peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <div class="block">
+                <div class="w-full text-sm">{{ answer.text }}</div>
+            </div>
+        </label>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% endif %}
+
+</div>
+
+

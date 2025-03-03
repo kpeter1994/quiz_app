@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load unicorn %}
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    {% unicorn_scripts %}
+</head>
+<body>
+
+   <div id="app">
+        {% block header %}
+        {% include 'components/header.html' %}
+    {% endblock %}
+
+
+    <div class="max-w-screen-xl mx-auto p-6">
+        {% block content %}
+            <p>Alapértelmezett tartalom</p>
+        {% endblock %}
+    </div>
+
+
+    {% block footer %}
+        {% include 'components/footer.html' %}
+    {% endblock %}
+   </div>
+
+
+</body>
+</html>
