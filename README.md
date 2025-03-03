@@ -38,7 +38,7 @@ python manage.py createsuperuser
 
 ### Alkalmazás létrehozása
 ``
-python manage.py startapp blog
+python manage.py startapp app
 ``
 
 ### Alkalmazás hozzáadása a settings.py fájlhoz
@@ -57,8 +57,14 @@ python manage.py makemigrations
 python manage.py migrate
 ``
 
+### Alkalamzás indítása
+``
+python manage.py runserver
+``
+
 ### Dinamikus komponensek hozzáadása a modellhez
 
 ``
  python manage.py startunicorn quiz hello-world hello-magic
 ``
+
